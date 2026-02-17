@@ -375,7 +375,7 @@ export default function App() {
 
   return (
     <div style={{ padding: 16, maxWidth: 980, margin: "0 auto" }}>
-      <h1 style={{ margin: "8px 0 4px" }}>Funny Filters (dead simple)</h1>
+      <h1 style={{ margin: "8px 0 4px" }}>Funny Filters (sup Rosie 👋)</h1>
       <div style={{ color: "#555", marginBottom: 12 }}>
         Status: <b>{status}</b>
       </div>
