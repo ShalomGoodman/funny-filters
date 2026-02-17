@@ -10,6 +10,9 @@ export default defineConfig({
   preview: {
     host: '0.0.0.0',
     strictPort: false,
-    allowedHosts: 'all'
+    allowedHosts: [
+      '.herokuapp.com',
+      'funny-filters-68352a4b37a8.herokuapp.com'
+    ]
   }
 })
