@@ -104,6 +104,9 @@ const DEFAULT_MASK_PNG = "data:image/svg+xml;base64," + btoa(`
 `);
 
 const LOGO_DATA_PATH = "/c13f1e65bbb212a8855d.svg";
+const TIGER_DATA_PATH = "/tiger.png";
+const PEACOCK_DATA_PATH = "/Peacock.png";
+const FLAMINGO_DATA_PATH = "/flamingo.png";
 
 function useImage(src) {
   const [img, setImg] = useState(null);
@@ -141,6 +144,9 @@ export default function App() {
   const customImg = useImage(customPng);
   const maskImg = useImage(DEFAULT_MASK_PNG);
   const logoImg = useImage(LOGO_DATA_PATH);
+  const tigerImg = useImage(TIGER_DATA_PATH);
+  const peacockImg = useImage(PEACOCK_DATA_PATH);
+  const flamingoImg = useImage(FLAMINGO_DATA_PATH);
 
   const activeOverlayImg = useMemo(() => {
     if (filter === "hat") return hatImg;
@@ -149,8 +155,11 @@ export default function App() {
     if (filter === "custom") return customImg;
     if (filter === "mask") return maskImg;
     if (filter === "logo") return logoImg;
+    if (filter === "tiger") return tigerImg;
+    if (filter === "peacock") return peacockImg;
+    if (filter === "flamingo") return flamingoImg;
     return null;
-  }, [filter, hatImg, glassesImg, mustacheImg, customImg, maskImg, logoImg]);
+  }, [filter, hatImg, glassesImg, mustacheImg, customImg, maskImg, logoImg, tigerImg, peacockImg, flamingoImg]);
 
   const detectorRef = useRef(null);
   const rafRef = useRef(null);
@@ -351,7 +360,7 @@ export default function App() {
             // draw overlay with head tilt
             drawImageRotated(ctx, activeOverlayImg, x, y, targetW, targetH, tilt);
           }
-        } catch (err) {
+        } catch {
           // If estimateFaces throws intermittently, just keep going.
           // (Often happens during camera start/stop transitions.)
         } finally {
@@ -375,7 +384,7 @@ export default function App() {
 
   return (
     <div style={{ padding: 16, maxWidth: 980, margin: "0 auto" }}>
-      <h1 style={{ margin: "8px 0 4px" }}>Funny Filters (sup Rosie 👋)</h1>
+      <h1 style={{ margin: "8px 0 4px" }}>Koshertown Filters Promo</h1>
       <div style={{ color: "#555", marginBottom: 12 }}>
         Status: <b>{status}</b>
       </div>
@@ -474,6 +483,9 @@ export default function App() {
                 <option value="custom">Custom PNG</option>
                 <option value="mask">Mask</option>
                 <option value="logo">Logo</option>
+                <option value="tiger">Tiger</option>
+                <option value="peacock">Peacock</option>
+                <option value="flamingo">Flamingo</option>
                 <option value="none">None</option>
               </select>
             </label>
@@ -532,11 +544,6 @@ export default function App() {
                 onChange={(e) => setYOffset(Number(e.target.value))}
               />
             </label>
-
-            <div style={{ fontSize: 12, color: "#666", lineHeight: 1.4 }}>
-              Under the hood: TFJS FaceMesh gives you a face <code>box</code> + <code>keypoints</code>.  [oai_citation:6‡GitHub](https://raw.githubusercontent.com/tensorflow/tfjs-models/master/face-landmarks-detection/README.md)  
-              This demo uses the bounding box (simplest). You can upgrade to keypoint-anchoring later.
-            </div>
           </div>
         </div>
       </div>
